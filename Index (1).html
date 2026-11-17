@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbearia - Studio D83 | Partenon, Porto Alegre</title>
+  <meta name="description" content="No Studio D83, o foco é o seu estilo. Especialistas em degradês, barboterapia e cortes personalizados no bairro Partenon, Porto Alegre - RS." />
+
+  <!-- Fontes: Montserrat, Plus Jakarta Sans e Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Ícones Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            studio: {
+              bg: '#0B0C0E',
+              surface: '#14161A',
+              card: '#1B1E24',
+              border: '#2A2E37',
+              amber: '#D97724',
+              amberLight: '#F59E0B',
+              brick: '#9A3412',
+              wood: '#78350F',
+              text: '#F3F4F6',
+              muted: '#9CA3AF',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilo base e padrões arquitetônicos sutis (LED Hexagonal) */
+    body {
+      background-color: #0B0C0E;
+      color: #F3F4F6;
+      overflow-x: hidden;
+    }
+
+    .hex-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15zM30 60l25.98 15v30L30 120 4.02 105V75z' fill='none' stroke='%23ffffff' stroke-opacity='0.035' stroke-width='1'/%3E%3C/svg%3E");
+    }
+
+    .amber-glow {
+      box-shadow: 0 0 30px -5px rgba(217, 119, 36, 0.25);
+    }
+
+    .led-border {
+      position: relative;
+    }
+    .led-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(217,119,36,0.45), rgba(255,255,255,0.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Transição suave entre views/páginas */
+    .page-view {
+      display: none;
+      animation: fadeSlideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .page-view.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0C0E;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2A2E37;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D97724;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-studio-amber selection:text-white">
+
+  <!-- Barra de Aviso Superior / Status -->
+  <div class="bg-studio-surface border-b border-studio-border text-xs py-2 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-studio-muted">
+      <div class="flex items-center gap-4">
+        <span class="inline-flex items-center gap-1.5 text-studio-text font-medium">
+          <i class="ph-fill ph-star text-amber-400 text-sm"></i>
+          5,0 <span class="text-studio-muted font-normal">(45 avaliações no Google)</span>
+        </span>
+        <span class="hidden sm:inline text-studio-border">|</span>
+        <span class="hidden sm:inline-flex items-center gap-1.5">
+          <i class="ph ph-clock text-studio-amber"></i>
+          Abre às 09:30 • Recomendado marcar hora
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="tel:+5551996892216" class="hover:text-white transition-colors inline-flex items-center gap-1">
+          <i class="ph ph-phone text-studio-amber"></i>
+          (51) 99689-2216
+        </a>
+        <span class="hidden md:inline text-studio-border">|</span>
+        <span class="hidden md:inline-flex items-center gap-1">
+          <i class="ph ph-map-pin text-studio-amber"></i>
+          Partenon, Porto Alegre - RS
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho & Navegação Multipágina Fixa -->
+  <header class="sticky top-0 z-40 bg-studio-bg/90 backdrop-blur-xl border-b border-studio-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo Oficial Studio D83 -->
+        <a href="#inicio" data-route="inicio" class="nav-link flex items-center gap-3.5 group">
+          <div class="w-11 h-11 rounded-xl bg-black border border-studio-border group-hover:border-studio-amber transition-all flex items-center justify-center relative overflow-hidden shadow-lg">
+            <!-- Detalhe Hexagonal LED no Logo -->
+            <svg class="w-7 h-7 text-white group-hover:text-studio-amber transition-colors" viewBox="0 0 36 36" fill="none">
+              <polygon points="18,3 31,10.5 31,25.5 18,33 5,25.5 5,10.5" stroke="currentColor" stroke-width="1.8" />
+              <text x="18" y="21.5" text-anchor="middle" fill="currentColor" font-family="Montserrat, sans-serif" font-weight="800" font-size="10.5">D83</text>
+            </svg>
+          </div>
+          <div>
+            <span class="block font-display font-extrabold text-lg tracking-tight text-white leading-none">
+              STUDIO <span class="text-studio-amber">D83</span>
+            </span>
+            <span class="block text-[11px] uppercase tracking-[0.22em] text-studio-muted mt-1">
+              Barbearia • Porto Alegre
+            </span>
+          </div>
+        </a>
+
+        <!-- Menu Desktop (Rotas Multipágina) -->
+        <nav class="hidden lg:flex items-center gap-1 bg-studio-surface/90 p-1.5 rounded-2xl border border-studio-border" aria-label="Navegação Principal">
+          <a href="#inicio" data-route="inicio" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all text-white bg-studio-card shadow-sm">
+            Início
+          </a>
+          <a href="#servicos" data-route="servicos" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all text-studio-muted hover:text-white">
+            Serviços &amp; Preços
+          </a>
+          <a href="#studio" data-route="studio" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all text-studio-muted hover:text-white">
+            O Studio &amp; Estrutura
+          </a>
+          <a href="#agendamento" data-route="agendamento" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all text-studio-muted hover:text-white">
+            Agendamento Online
+          </a>
+          <a href="#contato" data-route="contato" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all text-studio-muted hover:text-white">
+            Contato &amp; Localização
+          </a>
+        </nav>
+
+        <!-- Botão Ação Rápida Desktop + Botão Menu Mobile -->
+        <div class="flex items-center gap-3">
+          <a href="#agendamento" data-route="agendamento" class="nav-link hidden sm:inline-flex items-center gap-2 bg-studio-amber hover:bg-amber-600 text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-studio-amber/20 active:scale-95">
+            <i class="ph-bold ph-calendar-check text-base"></i>
+            Marcar Hora
+          </a>
+
+          <button id="mobile-menu-btn" type="button" aria-label="Abrir Menu" class="lg:hidden p-2.5 rounded-xl bg-studio-surface border border-studio-border text-studio-text hover:border-studio-amber transition-colors">
+            <i id="mobile-menu-icon" class="ph ph-list text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer Mobile -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-studio-surface border-b border-studio-border px-4 pt-3 pb-6 space-y-1.5">
+      <a href="#inicio" data-route="inicio" class="nav-link mobile-nav-item block px-4 py-3 rounded-xl text-sm font-medium text-white bg-studio-card">
+        <i class="ph ph-house mr-2 text-studio-amber"></i> Início
+      </a>
+      <a href="#servicos" data-route="servicos" class="nav-link mobile-nav-item block px-4 py-3 rounded-xl text-sm font-medium text-studio-muted hover:text-white hover:bg-studio-card/50">
+        <i class="ph ph-scissors mr-2 text-studio-amber"></i> Serviços &amp; Preços
+      </a>
+      <a href="#studio" data-route="studio" class="nav-link mobile-nav-item block px-4 py-3 rounded-xl text-sm font-medium text-studio-muted hover:text-white hover:bg-studio-card/50">
+        <i class="ph ph-buildings mr-2 text-studio-amber"></i> O Studio &amp; Estrutura
+      </a>
+      <a href="#agendamento" data-route="agendamento" class="nav-link mobile-nav-item block px-4 py-3 rounded-xl text-sm font-medium text-studio-muted hover:text-white hover:bg-studio-card/50">
+        <i class="ph ph-calendar-plus mr-2 text-studio-amber"></i> Agendamento Online
+      </a>
+      <a href="#contato" data-route="contato" class="nav-link mobile-nav-item block px-4 py-3 rounded-xl text-sm font-medium text-studio-muted hover:text-white hover:bg-studio-card/50">
+        <i class="ph ph-map-pin mr-2 text-studio-amber"></i> Contato &amp; Localização
+      </a>
+      <div class="pt-3 grid grid-cols-2 gap-2.5">
+        <a href="tel:+5551996892216" class="flex items-center justify-center gap-2 py-3 rounded-xl bg-studio-card border border-studio-border text-sm font-medium text-white">
+          <i class="ph-fill ph-phone text-studio-amber"></i> Ligar
+        </a>
+        <a href="https://wa.me/5551996892216" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-600 text-sm font-semibold text-white">
+          <i class="ph-fill ph-whatsapp-logo text-lg"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Área Principal das Páginas/Views -->
+  <main class="flex-grow">
+
+    <!-- =================================================================== -->
+    <!-- PÁGINA 1: INÍCIO                                                    -->
+    <!-- =================================================================== -->
+    <section id="page-inicio" class="page-view active">
+      <!-- Hero Arquitetônico Dark Luxury -->
+      <div class="relative hex-pattern border-b border-studio-border overflow-hidden">
+        <!-- Iluminação Ambiente LED Hexagonal -->
+        <div class="absolute -top-28 right-1/4 w-96 h-96 bg-studio-amber/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-10 w-80 h-80 bg-studio-brick/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-24 relative z-10">
+          <div class="grid lg:grid-cols-12 gap-12 items-center">
+            <!-- Coluna Texto Institucional -->
+            <div class="lg:col-span-7 space-y-6">
+              <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-studio-surface border border-studio-border text-xs font-medium text-studio-text">
+                <span class="flex items-center text-amber-400">
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                  <i class="ph-fill ph-star"></i>
+                </span>
+                <span>5,0 no Google (45 avaliações) • Partenon, POA</span>
+              </div>
+
+              <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]">
+                No Studio D83, o foco é o <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-studio-amber to-orange-500">seu estilo.</span>
+              </h1>
+
+              <p class="text-base sm:text-lg text-studio-muted max-w-2xl leading-relaxed">
+                Especialistas em degradês, barboterapia e cortes personalizados. Um ambiente moderno com iluminação LED hexagonal, acabamento rústico em madeira e tijolo aparente e atendimento de excelência no coração do Partenon.
+              </p>
+
+              <!-- Badges Rápidos de Valor -->
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <span class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-studio-surface/90 border border-studio-border text-xs sm:text-sm text-studio-text">
+                  <i class="ph ph-tag text-studio-amber text-base"></i>
+                  Faixa de preço: <strong class="text-white">R$ 20 – R$ 60</strong>
+                </span>
+                <span class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-studio-surface/90 border border-studio-border text-xs sm:text-sm text-studio-text">
+                  <i class="ph ph-clock text-studio-amber text-base"></i>
+                  Abre às <strong class="text-white">09:30</strong>
+                </span>
+              </div>
+
+              <!-- CTAs de Navegação para outras Páginas do Site -->
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-3">
+                <a href="#agendamento" data-route="agendamento" class="nav-link inline-flex items-center justify-center gap-2.5 bg-studio-amber hover:bg-amber-600 text-white font-heading font-bold text-base px-7 py-4 rounded-2xl transition-all amber-glow active:scale-95">
+                  <i class="ph-bold ph-calendar-check text-xl"></i>
+                  Agendar Horário Online
+                </a>
+                <a href="#servicos" data-route="servicos" class="nav-link inline-flex items-center justify-center gap-2.5 bg-studio-surface hover:bg-studio-card text-white border border-studio-border hover:border-studio-amber/60 font-heading font-semibold text-base px-7 py-4 rounded-2xl transition-all">
+                  <i class="ph ph-scissors text-xl text-studio-amber"></i>
+                  Explorar Serviços &amp; Preços
+                </a>
+              </div>
+            </div>
+
+            <!-- Coluna Card Arquitetônico / Visual Studio D83 -->
+            <div class="lg:col-span-5">
+              <div class="led-border bg-studio-surface rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+                <!-- Ilustração SVG Arquitetônica inspirada nas fotos reais do Studio D83 -->
+                <div class="rounded-2xl bg-gradient-to-b from-[#181512] via-[#121316] to-[#0B0C0E] border border-studio-border p-6 mb-6 relative overflow-hidden">
+                  <!-- Teto Amadeirado + Luminárias Hexagonais LED -->
+                  <svg viewBox="0 0 400 210" class="w-full h-auto rounded-xl" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="woodRoof" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#5C2D16" />
+                        <stop offset="100%" stop-color="#29150B" />
+                      </linearGradient>
+                      <filter id="ledGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                      </filter>
+                    </defs>
+                    <!-- Fundo parede tijolo rústico e cimento queimado -->
+                    <rect width="400" height="210" rx="12" fill="#16181D" />
+                    <path d="M0 0 H400 L355 58 H45 Z" fill="url(#woodRoof)" />
+                    <!-- Tijolos aparentes laterais -->
+                    <rect x="20" y="65" width="95" height="125" rx="4" fill="#7C2D12" fill-opacity="0.35" stroke="#9A3412" stroke-opacity="0.4" />
+                    <rect x="285" y="65" width="95" height="125" rx="4" fill="#7C2D12" fill-opacity="0.35" stroke="#9A3412" stroke-opacity="0.4" />
+                    <!-- Colmeia LED Hexagonal no Teto -->
+                    <g stroke="#FFFBEB" stroke-width="2.2" filter="url(#ledGlow)">
+                      <polygon points="155,14 178,14 189,32 178,50 155,50 144,32" />
+                      <polygon points="189,32 212,32 223,50 212,68 189,68 178,50" />
+                      <polygon points="223,14 246,14 257,32 246,50 223,50 212,32" />
+                    </g>
+                    <!-- Espelho com Ring Light -->
+                    <rect x="145" y="75" width="110" height="90" rx="10" fill="#0B0C0E" stroke="#374151" stroke-width="2" />
+                    <circle cx="200" cy="118" r="24" stroke="#F59E0B" stroke-width="2" stroke-opacity="0.85" />
+                    <!-- Cadeira de Barbeiro Estilizada -->
+                    <rect x="172" y="142" width="56" height="36" rx="8" fill="#1F242D" stroke="#D97724" stroke-width="1.5" />
+                    <rect x="180" y="128" width="40" height="16" rx="5" fill="#2A303C" />
+                    <rect x="195" y="178" width="10" height="18" fill="#9CA3AF" />
+                    <ellipse cx="200" cy="197" rx="28" ry="5" fill="#4B5563" />
+                    <!-- Badge Studio D83 -->
+                    <rect x="142" y="12" width="116" height="22" rx="11" fill="#0B0C0E" fill-opacity="0.85" stroke="#D97724" stroke-opacity="0.6" />
+                    <text x="200" y="26" text-anchor="middle" fill="#F3F4F6" font-family="Montserrat, sans-serif" font-weight="700" font-size="10" letter-spacing="1.5">STUDIO D83</text>
+                  </svg>
+                </div>
+
+                <!-- Depoimento Destaque Real do Google -->
+                <div class="bg-studio-card/90 border border-studio-border rounded-2xl p-4 mb-5">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                      <div class="w-8 h-8 rounded-full bg-studio-amber/20 border border-studio-amber/40 flex items-center justify-center text-studio-amber font-bold text-xs">
+                        G
+                      </div>
+                      <div>
+                        <p class="text-xs font-semibold text-white">Avaliação Verificada Google</p>
+                        <div class="flex text-amber-400 text-xs">
+                          <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="text-xs font-bold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-lg">5,0 ★ (45)</span>
+                  </div>
+                  <p class="text-sm text-studio-text italic">
+                    "Excelente barbearia no bairro Partenon."
+                  </p>
+                </div>
+
+                <!-- Ações Diretas de Localização e Contato -->
+                <div class="space-y-2.5 text-sm">
+                  <div class="flex items-start gap-3 text-studio-muted">
+                    <i class="ph-fill ph-map-pin text-studio-amber text-lg mt-0.5 shrink-0"></i>
+                    <span>R. Dr. Pereira da Cunha, 19 - Partenon, Porto Alegre - RS, 91530-290</span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-3 pt-2">
+                    <a href="#contato" data-route="contato" class="nav-link flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-studio-card hover:bg-studio-border/60 border border-studio-border text-white font-medium transition-colors">
+                      <i class="ph ph-navigation-arrow text-studio-amber"></i> Como Chegar
+                    </a>
+                    <a href="https://wa.me/5551996892216" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 font-medium transition-colors">
+                      <i class="ph-fill ph-whatsapp-logo text-base"></i> WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegação Visual por Pilares (Acesso às Outras Páginas) -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-studio-amber">Navegue pelo Studio D83</span>
+            <h2 class="font-display font-bold text-2xl sm:text-3xl text-white mt-1">Tudo o que você precisa em um só lugar</h2>
+          </div>
+          <p class="text-sm text-studio-muted max-w-md">
+            Explore nosso catálogo completo de serviços, conheça nossa estrutura no Partenon ou reserve seu horário online.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card Rota: Serviços -->
+          <a href="#servicos" data-route="servicos" class="nav-link group bg-studio-surface hover:bg-studio-card border border-studio-border hover:border-studio-amber/60 rounded-2xl p-6 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-studio-amber/15 border border-studio-amber/30 flex items-center justify-center text-studio-amber text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="ph ph-scissors"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">Serviços &amp; Preços</h3>
+              <p class="text-sm text-studio-muted leading-relaxed">
+                Degradês, barboterapia com toalha quente, penteados afro, cabelos cacheados, infantil e pacotes para noivos.
+              </p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-studio-amber mt-6 group-hover:translate-x-1 transition-transform">
+              Ver Catálogo (R$ 20–60) <i class="ph-bold ph-arrow-right"></i>
+            </span>
+          </a>
+
+          <!-- Card Rota: O Studio -->
+          <a href="#studio" data-route="studio" class="nav-link group bg-studio-surface hover:bg-studio-card border border-studio-border hover:border-studio-amber/60 rounded-2xl p-6 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-studio-amber/15 border border-studio-amber/30 flex items-center justify-center text-studio-amber text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="ph ph-armchair"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">O Studio &amp; Estrutura</h3>
+              <p class="text-sm text-studio-muted leading-relaxed">
+                Ambiente climatizado, bar e barbearia, iluminação LED hexagonal, espaço kids e pagamentos via NFC e cartões.
+              </p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-studio-amber mt-6 group-hover:translate-x-1 transition-transform">
+              Conhecer Diferenciais <i class="ph-bold ph-arrow-right"></i>
+            </span>
+          </a>
+
+          <!-- Card Rota: Agendamento -->
+          <a href="#agendamento" data-route="agendamento" class="nav-link group bg-studio-surface hover:bg-studio-card border border-studio-border hover:border-studio-amber/60 rounded-2xl p-6 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-studio-amber/15 border border-studio-amber/30 flex items-center justify-center text-studio-amber text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="ph ph-calendar-check"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">Agendamento Online</h3>
+              <p class="text-sm text-studio-muted leading-relaxed">
+                Escolha seus serviços, data e horário a partir das 09:30 e envie sua reserva formatada direto no WhatsApp.
+              </p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-studio-amber mt-6 group-hover:translate-x-1 transition-transform">
+              Reservar Agora <i class="ph-bold ph-arrow-right"></i>
+            </span>
+          </a>
+
+          <!-- Card Rota: Contato -->
+          <a href="#contato" data-route="contato" class="nav-link group bg-studio-surface hover:bg-studio-card border border-studio-border hover:border-studio-amber/60 rounded-2xl p-6 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-studio-amber/15 border border-studio-amber/30 flex items-center justify-center text-studio-amber text-2xl mb-5 group-hover:scale-110 transition-transform">
+                <i class="ph ph-map-pin-line"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">Contato &amp; Localização</h3>
+              <p class="text-sm text-studio-muted leading-relaxed">
+                Mapa interativo na R. Dr. Pereira da Cunha, 19 - Partenon, rotas GPS, telefone e horários de atendimento.
+              </p>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-studio-amber mt-6 group-hover:translate-x-1 transition-transform">
+              Abrir Mapa e Rotas <i class="ph-bold ph-arrow-right"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- PÁGINA 2: SERVIÇOS & PREÇOS                                         -->
+    <!-- =================================================================== -->
+    <section id="page-servicos" class="page-view">
+      <div class="bg-studio-surface border-b border-studio-border hex-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-[0.2em] text-studio-amber">Tabela Oficial Studio D83</span>
+              <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">Serviços &amp; Preços</h1>
+              <p class="text-studio-muted text-sm sm:text-base mt-2 max-w-2xl">
+                Valores acessíveis entre <strong class="text-white">R$ 20 e R$ 60</strong> (além de pacotes personalizados para noivos). Selecione os serviços desejados para já levá-los ao agendamento.
+              </p>
+            </div>
+
+            <!-- Barra de Busca Rápida de Serviços -->
+            <div class="relative w-full lg:w-80">
+              <i class="ph ph-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-studio-muted text-lg"></i>
+              <input id="service-search" type="text" placeholder="Buscar serviço (ex: degradê, afro, barba)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-studio-bg border border-studio-border text-sm text-white placeholder-studio-muted focus:outline-none focus:border-studio-amber transition-colors" />
+            </div>
+          </div>
+
+          <!-- Filtros Interativos por Categoria -->
+          <div id="category-filters" class="flex flex-wrap gap-2.5 mt-8">
+            <button data-cat="todos" class="cat-btn active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-studio-amber text-white transition-all">
+              Todos os Serviços (23)
+            </button>
+            <button data-cat="cortes" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-studio-bg text-studio-muted hover:text-white border border-studio-border transition-all">
+              Cortes &amp; Estilo (10)
+            </button>
+            <button data-cat="barba" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-studio-bg text-studio-muted hover:text-white border border-studio-border transition-all">
+              Barba &amp; Barboterapia (5)
+            </button>
+            <button data-cat="especialidades" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-studio-bg text-studio-muted hover:text-white border border-studio-border transition-all">
+              Especialidades &amp; Tratamentos (5)
+            </button>
+            <button data-cat="estetica" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-studio-bg text-studio-muted hover:text-white border border-studio-border transition-all">
+              Estética &amp; Pacotes Especiais (3)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grade Dinâmica de Serviços -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Renderizado via JavaScript com todos os 23 serviços reais -->
+        </div>
+
+        <!-- Barra Flutuante de Resumo caso o cliente selecione serviços aqui -->
+        <div id="services-selection-bar" class="hidden mt-10 bg-studio-surface border border-studio-amber/50 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 amber-glow">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-studio-amber/20 text-studio-amber flex items-center justify-center font-bold">
+              <i class="ph-fill ph-check-circle text-xl"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-white"><span id="selected-count-badge">0</span> serviço(s) selecionado(s)</p>
+              <p class="text-xs text-studio-muted">Pronto para escolher data e horário a partir das 09:30.</p>
+            </div>
+          </div>
+          <a href="#agendamento" data-route="agendamento" class="nav-link w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-studio-amber hover:bg-amber-600 text-white font-heading font-bold text-sm px-6 py-3 rounded-xl transition-all">
+            Continuar para Agendamento <i class="ph-bold ph-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- PÁGINA 3: O STUDIO & ESTRUTURA                                      -->
+    <!-- =================================================================== -->
+    <section id="page-studio" class="page-view">
+      <div class="bg-studio-surface border-b border-studio-border hex-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-studio-amber">Arquitetura, Conforto &amp; Hospitalidade</span>
+          <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">O Studio &amp; Estrutura</h1>
+          <p class="text-studio-muted text-sm sm:text-base mt-2 max-w-2xl">
+            Projetado para oferecer conforto térmico, visual moderno e praticidade no bairro Partenon. Conheça cada detalhe da experiência Studio D83.
+          </p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+        <!-- Destaque Arquitetônico -->
+        <div class="grid lg:grid-cols-2 gap-8 items-center bg-studio-surface border border-studio-border rounded-3xl p-6 sm:p-10">
+          <div class="space-y-5">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-studio-brick/25 border border-studio-brick/50 text-amber-300 text-xs font-semibold">
+              <i class="ph-fill ph-sparkle"></i> Design Industrial &amp; Acolhedor
+            </span>
+            <h2 class="font-display font-bold text-2xl sm:text-3xl text-white">
+              Iluminação LED Hexagonal, Madeira &amp; Tijolo Aparente
+            </h2>
+            <p class="text-studio-muted text-sm sm:text-base leading-relaxed">
+              Nosso salão combina o calor da madeira natural e do tijolo rústico aparente com iluminação LED hexagonal de alta precisão — garantindo visibilidade perfeita para degradês milimétricos e barboterapia, em um espaço totalmente climatizado.
+            </p>
+            <div class="grid grid-cols-2 gap-4 pt-2">
+              <div class="bg-studio-bg border border-studio-border rounded-2xl p-4">
+                <i class="ph-fill ph-snowflake text-studio-amber text-2xl mb-2"></i>
+                <h4 class="font-heading font-bold text-sm text-white">100% Climatizado</h4>
+                <p class="text-xs text-studio-muted mt-1">Conforto térmico em qualquer estação do ano.</p>
+              </div>
+              <div class="bg-studio-bg border border-studio-border rounded-2xl p-4">
+                <i class="ph-fill ph-armchair text-studio-amber text-2xl mb-2"></i>
+                <h4 class="font-heading font-bold text-sm text-white">Cadeiras Ergônomicas</h4>
+                <p class="text-xs text-studio-muted mt-1">Bancadas amplas e poltronas reclináveis para barba.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Galeria Arquitetônica Ilustrada dos Ambientes Reais -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-2 bg-studio-bg border border-studio-border rounded-2xl p-5 flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl">
+                  <i class="ph-fill ph-hexagon"></i>
+                </div>
+                <div>
+                  <h3 class="font-heading font-bold text-white text-base">Salão Principal &amp; Bancadas</h3>
+                  <p class="text-xs text-studio-muted">Espelhos individuais iluminados + teto amadeirado com colmeia LED.</p>
+                </div>
+              </div>
+              <span class="hidden sm:inline-block text-xs font-semibold text-studio-amber bg-studio-amber/10 px-3 py-1 rounded-lg">Partenon</span>
+            </div>
+
+            <div class="bg-studio-bg border border-studio-border rounded-2xl p-5">
+              <i class="ph-fill ph-beer-bottle text-studio-amber text-2xl mb-3"></i>
+              <h3 class="font-heading font-bold text-white text-sm">Bar e Barbearia</h3>
+              <p class="text-xs text-studio-muted mt-1 leading-relaxed">
+                Espaço de convivência agradável para relaxar antes ou depois do seu atendimento.
+              </p>
+            </div>
+
+            <div class="bg-studio-bg border border-studio-border rounded-2xl p-5">
+              <i class="ph-fill ph-smiley text-studio-amber text-2xl mb-3"></i>
+              <h3 class="font-heading font-bold text-white text-sm">Ambiente Familiar &amp; Kids</h3>
+              <p class="text-xs text-studio-muted mt-1 leading-relaxed">
+                Bom para ir com crianças, com cortes infantis dedicados e equipe paciente.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid Completo de Comodidades, Planejamento e Pagamentos (Extraídos do Google) -->
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Card 1: Comodidades & Crianças -->
+          <div class="bg-studio-surface border border-studio-border rounded-2xl p-6 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-studio-amber/15 text-studio-amber flex items-center justify-center text-xl">
+                <i class="ph-fill ph-check-square-offset"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white">Comodidades</h3>
+            </div>
+            <ul class="space-y-3 text-sm text-studio-text">
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Banheiro disponível e higienizado
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Bar e barbearia (área de espera)
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Bom para ir com crianças
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Lavatório completo (shampoo e condicionador)
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Planejamento -->
+          <div class="bg-studio-surface border border-studio-border rounded-2xl p-6 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-studio-amber/15 text-studio-amber flex items-center justify-center text-xl">
+                <i class="ph-fill ph-calendar-blank"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white">Planejamento</h3>
+            </div>
+            <ul class="space-y-3 text-sm text-studio-text">
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> É recomendado marcar hora
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Reservas on-line via WhatsApp
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Atendimento pontual a partir das 09:30
+              </li>
+            </ul>
+            <div class="pt-2">
+              <a href="#agendamento" data-route="agendamento" class="nav-link inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-studio-amber hover:underline">
+                Reservar meu horário <i class="ph-bold ph-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: Formas de Pagamento -->
+          <div class="bg-studio-surface border border-studio-border rounded-2xl p-6 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-studio-amber/15 text-studio-amber flex items-center justify-center text-xl">
+                <i class="ph-fill ph-contactless-payment"></i>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white">Pagamentos Aceitos</h3>
+            </div>
+            <ul class="space-y-3 text-sm text-studio-text">
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Cartão de crédito
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Cartão de débito
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Pagamentos via NFC (aproximação)
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i class="ph-bold ph-check text-emerald-400"></i> Pix e Dinheiro
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- PÁGINA 4: AGENDAMENTO ONLINE                                        -->
+    <!-- =================================================================== -->
+    <section id="page-agendamento" class="page-view">
+      <div class="bg-studio-surface border-b border-studio-border hex-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-studio-amber">Reservas On-Line • Planejamento</span>
+          <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">Agendamento Online</h1>
+          <p class="text-studio-muted text-sm sm:text-base mt-2 max-w-2xl">
+            É recomendado marcar hora. Monte seu atendimento passo a passo e confirme diretamente pelo WhatsApp oficial do Studio D83 <strong class="text-white">(51) 99689-2216</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <!-- Coluna Esquerda: Passos Interativos -->
+          <div class="lg:col-span-7 space-y-6">
+            <!-- Passo 1: Escolha de Serviços -->
+            <div class="bg-studio-surface border border-studio-border rounded-2xl p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-lg bg-studio-amber text-white font-display font-bold text-sm flex items-center justify-center">1</span>
+                  <h2 class="font-heading font-bold text-lg text-white">Escolha o(s) Serviço(s)</h2>
+                </div>
+                <span class="text-xs text-studio-muted">Selecione um ou mais</span>
+              </div>
+
+              <!-- Filtro rápido dentro do agendamento -->
+              <div class="mb-4">
+                <select id="booking-category-filter" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-studio-bg border border-studio-border text-xs sm:text-sm text-white focus:outline-none focus:border-studio-amber">
+                  <option value="todos">Todas as Categorias</option>
+                  <option value="cortes">Cortes &amp; Estilo</option>
+                  <option value="barba">Barba &amp; Barboterapia</option>
+                  <option value="especialidades">Especialidades &amp; Tratamentos</option>
+                  <option value="estetica">Estética &amp; Pacotes Especiais</option>
+                </select>
+              </div>
+
+              <div id="booking-services-list" class="grid sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
+                <!-- Preenchido via JS -->
+              </div>
+            </div>
+
+            <!-- Passo 2: Data e Horário (a partir das 09:30) -->
+            <div class="bg-studio-surface border border-studio-border rounded-2xl p-6">
+              <div class="flex items-center gap-3 mb-5">
+                <span class="w-8 h-8 rounded-lg bg-studio-amber text-white font-display font-bold text-sm flex items-center justify-center">2</span>
+                <h2 class="font-heading font-bold text-lg text-white">Data &amp; Horário</h2>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="booking-date" class="block text-xs font-semibold uppercase tracking-wider text-studio-muted mb-2">Data Desejada</label>
+                  <input id="booking-date" type="date" class="w-full px-4 py-3 rounded-xl bg-studio-bg border border-studio-border text-sm text-white focus:outline-none focus:border-studio-amber" />
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-studio-muted mb-2">Horário (A partir das 09:30)</label>
+                  <div id="time-slots-grid" class="grid grid-cols-3 gap-2">
+                    <!-- Slots gerados via JS a partir das 09:30 -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Passo 3: Identificação do Cliente -->
+            <div class="bg-studio-surface border border-studio-border rounded-2xl p-6">
+              <div class="flex items-center gap-3 mb-5">
+                <span class="w-8 h-8 rounded-lg bg-studio-amber text-white font-display font-bold text-sm flex items-center justify-center">3</span>
+                <h2 class="font-heading font-bold text-lg text-white">Seus Dados</h2>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="client-name" class="block text-xs font-semibold uppercase tracking-wider text-studio-muted mb-2">Seu Nome Completo *</label>
+                  <input id="client-name" type="text" placeholder="Ex: João Silva" class="w-full px-4 py-3 rounded-xl bg-studio-bg border border-studio-border text-sm text-white placeholder-studio-muted focus:outline-none focus:border-studio-amber" />
+                </div>
+                <div>
+                  <label for="client-notes" class="block text-xs font-semibold uppercase tracking-wider text-studio-muted mb-2">Observação (Opcional)</label>
+                  <input id="client-notes" type="text" placeholder="Ex: Degradê navalhado, atendimento infantil..." class="w-full px-4 py-3 rounded-xl bg-studio-bg border border-studio-border text-sm text-white placeholder-studio-muted focus:outline-none focus:border-studio-amber" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna Direita: Resumo & Envio WhatsApp -->
+          <div class="lg:col-span-5 lg:sticky lg:top-28">
+            <div class="led-border bg-studio-surface rounded-3xl p-6 sm:p-7 shadow-2xl space-y-5">
+              <div class="flex items-center justify-between border-b border-studio-border pb-4">
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wider text-studio-amber">Resumo da Reserva</span>
+                  <h3 class="font-display font-bold text-xl text-white mt-0.5">Barbearia - Studio D83</h3>
+                </div>
+                <i class="ph-fill ph-whatsapp-logo text-3xl text-emerald-400"></i>
+              </div>
+
+              <!-- Lista de Serviços Selecionados -->
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wider text-studio-muted mb-2">Serviços Selecionados</p>
+                <div id="summary-services" class="space-y-2 text-sm">
+                  <p class="text-studio-muted italic text-xs">Nenhum serviço selecionado ainda.</p>
+                </div>
+              </div>
+
+              <!-- Detalhes Data/Hora/Cliente -->
+              <div class="bg-studio-bg border border-studio-border rounded-2xl p-4 space-y-2.5 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-studio-muted">Cliente:</span>
+                  <span id="summary-name" class="font-semibold text-white">Não informado</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-studio-muted">Data:</span>
+                  <span id="summary-date" class="font-semibold text-white">Selecione uma data</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-studio-muted">Horário:</span>
+                  <span id="summary-time" class="font-semibold text-studio-amber">Selecione um horário</span>
+                </div>
+                <div class="flex justify-between border-t border-studio-border pt-2.5">
+                  <span class="text-studio-muted">Estimativa:</span>
+                  <span id="summary-total" class="font-bold text-white">R$ 0,00</span>
+                </div>
+              </div>
+
+              <!-- Alerta Inline de Validação (Substitui alert()) -->
+              <div id="booking-feedback" class="hidden rounded-xl p-3.5 text-xs font-medium border"></div>
+
+              <!-- Botão Confirmar no WhatsApp -->
+              <button id="confirm-whatsapp-btn" type="button" class="w-full py-4 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-heading font-bold text-base flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-emerald-600/20 active:scale-95">
+                <i class="ph-fill ph-whatsapp-logo text-xl"></i>
+                Confirmar Agendamento no WhatsApp
+              </button>
+
+              <p class="text-[11px] text-center text-studio-muted">
+                Ao confirmar, você será redirecionado para o WhatsApp oficial <strong class="text-white">(51) 99689-2216</strong> com sua mensagem pronta.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- PÁGINA 5: CONTATO & LOCALIZAÇÃO                                     -->
+    <!-- =================================================================== -->
+    <section id="page-contato" class="page-view">
+      <div class="bg-studio-surface border-b border-studio-border hex-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-studio-amber">Partenon • Porto Alegre - RS</span>
+          <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">Contato &amp; Localização</h1>
+          <p class="text-studio-muted text-sm sm:text-base mt-2 max-w-2xl">
+            Venha nos visitar no bairro Partenon ou entre em contato diretamente pelo telefone e WhatsApp.
+          </p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid lg:grid-cols-12 gap-8">
+          <!-- Informações de Contato -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-studio-surface border border-studio-border rounded-2xl p-6 space-y-5">
+              <h2 class="font-heading font-bold text-xl text-white">Canais Diretos</h2>
+
+              <!-- Endereço -->
+              <div class="flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-studio-amber/15 text-studio-amber flex items-center justify-center text-xl shrink-0">
+                  <i class="ph-fill ph-map-pin"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-wider text-studio-muted">Endereço</p>
+                  <p class="text-sm font-medium text-white mt-0.5">
+                    R. Dr. Pereira da Cunha, 19 - Partenon<br />
+                    Porto Alegre - RS, CEP 91530-290
+                  </p>
+                </div>
+              </div>
+
+              <!-- Telefone e WhatsApp -->
+              <div class="flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                  <i class="ph-fill ph-whatsapp-logo"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-wider text-studio-muted">Telefone &amp; WhatsApp</p>
+                  <p class="text-base font-bold text-white mt-0.5">(51) 99689-2216</p>
+                  <div class="flex flex-wrap gap-2 mt-2">
+                    <a href="https://wa.me/5551996892216" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-500 transition-colors">
+                      <i class="ph-fill ph-whatsapp-logo"></i> Enviar Mensagem
+                    </a>
+                    <a href="tel:+5551996892216" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-studio-card border border-studio-border text-white hover:border-studio-amber transition-colors">
+                      <i class="ph-fill ph-phone"></i> Ligar Agora
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Horários -->
+              <div class="flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-studio-amber/15 text-studio-amber flex items-center justify-center text-xl shrink-0">
+                  <i class="ph-fill ph-clock"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-wider text-studio-muted">Horário de Funcionamento</p>
+                  <p class="text-sm font-medium text-white mt-0.5">Abertura às 09:30</p>
+                  <p class="text-xs text-studio-muted mt-0.5">Recomendado marcar hora antecipadamente.</p>
+                </div>
+              </div>
+
+              <!-- Botão Rotas Google Maps -->
+              <div class="pt-2">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Dr.+Pereira+da+Cunha,+19+-+Partenon,+Porto+Alegre+-+RS,+91530-290" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-5 rounded-xl bg-studio-amber hover:bg-amber-600 text-white font-heading font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                  <i class="ph-bold ph-navigation-arrow text-lg"></i>
+                  Traçar Rota no Google Maps
+                </a>
+              </div>
+            </div>
+
+            <!-- Resumo Pagamentos -->
+            <div class="bg-studio-surface border border-studio-border rounded-2xl p-6">
+              <h3 class="font-heading font-bold text-base text-white mb-3">Facilidades de Pagamento</h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1.5 rounded-lg bg-studio-bg border border-studio-border text-xs text-studio-text">
+                  <i class="ph ph-credit-card text-studio-amber mr-1"></i> Crédito
+                </span>
+                <span class="px-3 py-1.5 rounded-lg bg-studio-bg border border-studio-border text-xs text-studio-text">
+                  <i class="ph ph-credit-card text-studio-amber mr-1"></i> Débito
+                </span>
+                <span class="px-3 py-1.5 rounded-lg bg-studio-bg border border-studio-border text-xs text-studio-text">
+                  <i class="ph ph-device-mobile-camera text-studio-amber mr-1"></i> NFC (Aproximação)
+                </span>
+                <span class="px-3 py-1.5 rounded-lg bg-studio-bg border border-studio-border text-xs text-studio-text">
+                  <i class="ph ph-qr-code text-studio-amber mr-1"></i> Pix
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mapa Interativo Incorporado (Google Maps) -->
+          <div class="lg:col-span-7">
+            <div class="bg-studio-surface border border-studio-border rounded-3xl p-3 h-full min-h-[420px] flex flex-col">
+              <div class="rounded-2xl overflow-hidden flex-grow relative bg-studio-bg">
+                <iframe
+                  title="Mapa Barbearia Studio D83 - Partenon, Porto Alegre"
+                  src="https://www.google.com/maps?q=R.+Dr.+Pereira+da+Cunha,+19+-+Partenon,+Porto+Alegre+-+RS,+91530-290&output=embed"
+                  class="w-full h-full min-h-[400px] border-0"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+              <div class="px-3 pt-3 pb-1 flex flex-wrap items-center justify-between gap-2 text-xs text-studio-muted">
+                <span>Barbearia - Studio D83 • Partenon, Porto Alegre - RS</span>
+                <span class="text-amber-400 font-semibold">★ 5,0 (45 avaliações)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="bg-studio-surface border-t border-studio-border mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-4 gap-8 pb-8 border-b border-studio-border">
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-black border border-studio-border flex items-center justify-center text-studio-amber font-display font-extrabold text-xs">
+              D83
+            </div>
+            <span class="font-display font-bold text-lg text-white">Barbearia - Studio D83</span>
+          </div>
+          <p class="text-sm text-studio-muted max-w-md leading-relaxed">
+            No Studio D83, o foco é o seu estilo. Especialistas em degradês, barboterapia e cortes personalizados no bairro Partenon, Porto Alegre.
+          </p>
+          <div class="flex items-center gap-2 text-xs text-amber-400 font-semibold">
+            <span>★★★★★</span>
+            <span class="text-studio-muted font-normal">5,0 estrelas (45 avaliações no Google)</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-heading font-bold text-sm text-white uppercase tracking-wider mb-3">Navegação</h4>
+          <ul class="space-y-2 text-sm text-studio-muted">
+            <li><a href="#inicio" data-route="inicio" class="nav-link hover:text-studio-amber transition-colors">Início</a></li>
+            <li><a href="#servicos" data-route="servicos" class="nav-link hover:text-studio-amber transition-colors">Serviços &amp; Preços</a></li>
+            <li><a href="#studio" data-route="studio" class="nav-link hover:text-studio-amber transition-colors">O Studio &amp; Estrutura</a></li>
+            <li><a href="#agendamento" data-route="agendamento" class="nav-link hover:text-studio-amber transition-colors">Agendamento Online</a></li>
+            <li><a href="#contato" data-route="contato" class="nav-link hover:text-studio-amber transition-colors">Contato &amp; Localização</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-heading font-bold text-sm text-white uppercase tracking-wider mb-3">Contato</h4>
+          <ul class="space-y-2 text-sm text-studio-muted">
+            <li>R. Dr. Pereira da Cunha, 19 - Partenon, Porto Alegre - RS, 91530-290</li>
+            <li>
+              <a href="tel:+5551996892216" class="text-white hover:text-studio-amber transition-colors font-medium">(51) 99689-2216</a>
+            </li>
+            <li>Abre às 09:30 (Recomendado marcar hora)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-studio-muted">
+        <p>© 2026 Barbearia - Studio D83. Todos os direitos reservados.</p>
+        <p>Partenon, Porto Alegre - RS</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Flutuante Discreto do WhatsApp -->
+  <a href="https://wa.me/5551996892216" target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp (51) 99689-2216" class="fixed bottom-5 right-5 z-50 group flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3.5 rounded-full shadow-2xl shadow-emerald-950/60 transition-all hover:scale-105 active:scale-95">
+    <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
+    <span class="hidden sm:inline text-xs font-heading font-bold tracking-wide pr-1">WhatsApp</span>
+  </a>
+
+  <!-- Lógica de Roteamento Multipágina e Agendamento Interativo -->
+  <script>
+    // Catálogo completo dos 23 serviços reais extraídos das imagens do Studio D83
+    const SERVICES_DATA = [
+      // 1. Cortes & Estilo
+      { id: 'corte-cabelo', name: 'Corte de cabelo', category: 'cortes', catLabel: 'Cortes & Estilo', price: 35, priceLabel: 'R$ 35', desc: 'Corte tradicional ou moderno executado com precisão.' },
+      { id: 'corte-degrade', name: 'Corte em degradê', category: 'cortes', catLabel: 'Cortes & Estilo', price: 40, priceLabel: 'R$ 40', desc: 'Fade limpo e transição suave (low, mid ou high fade).' },
+      { id: 'corte-personalizado', name: 'Corte personalizado', category: 'cortes', catLabel: 'Cortes & Estilo', price: 45, priceLabel: 'R$ 45', desc: 'Visagismo e acabamento sob medida para o formato do seu rosto.' },
+      { id: 'corte-navalha', name: 'Corte com navalha', category: 'cortes', catLabel: 'Cortes & Estilo', price: 45, priceLabel: 'R$ 45', desc: 'Acabamento navalhado de alta definição.' },
+      { id: 'corte-militar', name: 'Corte militar', category: 'cortes', catLabel: 'Cortes & Estilo', price: 30, priceLabel: 'R$ 30', desc: 'Corte prático, alinhado e de baixa manutenção.' },
+      { id: 'corte-militar-reto', name: 'Corte militar reto', category: 'cortes', catLabel: 'Cortes & Estilo', price: 35, priceLabel: 'R$ 35', desc: 'Topo nivelado com acabamento simétrico.' },
+      { id: 'corte-longo', name: 'Corte de cabelo longo', category: 'cortes', catLabel: 'Cortes & Estilo', price: 45, priceLabel: 'R$ 45', desc: 'Corte na tesoura, camadas e manutenção de comprimento.' },
+      { id: 'cortes-infantis', name: 'Cortes infantis', category: 'cortes', catLabel: 'Cortes & Estilo', price: 30, priceLabel: 'R$ 30', desc: 'Atendimento paciente em ambiente acolhedor para crianças.' },
+      { id: 'raspar-cabeca', name: 'Raspar a cabeça', category: 'cortes', catLabel: 'Cortes & Estilo', price: 25, priceLabel: 'R$ 25', desc: 'Raspagem uniforme com máquina ou navalha.' },
+      { id: 'raspar-cabelo', name: 'Raspar o cabelo', category: 'cortes', catLabel: 'Cortes & Estilo', price: 25, priceLabel: 'R$ 25', desc: 'Acabamento limpo e alinhamento de pezinho.' },
+
+      // 2. Barba & Barboterapia
+      { id: 'barba', name: 'Barba', category: 'barba', catLabel: 'Barba & Barboterapia', price: 30, priceLabel: 'R$ 30', desc: 'Modelagem e hidratação dos fios da barba.' },
+      { id: 'aparar-barba', name: 'Aparar a barba', category: 'barba', catLabel: 'Barba & Barboterapia', price: 25, priceLabel: 'R$ 25', desc: 'Redução de volume e alinhamento simétrico.' },
+      { id: 'manutencao-barba', name: 'Manutenção de barba', category: 'barba', catLabel: 'Barba & Barboterapia', price: 30, priceLabel: 'R$ 30', desc: 'Contorno, hidratação e óleo finalizador.' },
+      { id: 'barba-navalha', name: 'Barba com navalha', category: 'barba', catLabel: 'Barba & Barboterapia', price: 35, priceLabel: 'R$ 35', desc: 'Desenho preciso com lâmina descartável e pós-barba.' },
+      { id: 'barbear-toalha-quente', name: 'Barbear com toalha quente', category: 'barba', catLabel: 'Barba & Barboterapia', price: 40, priceLabel: 'R$ 40', desc: 'Barboterapia relaxante com abertura dos poros e massagem facial.' },
+
+      // 3. Especialidades & Tratamentos
+      { id: 'penteados-afro', name: 'Especialista em penteados afro', category: 'especialidades', catLabel: 'Especialidades & Tratamentos', price: 50, priceLabel: 'R$ 50', desc: 'Técnicas especializadas para valorizar a textura e o estilo afro.' },
+      { id: 'cabelos-cacheados', name: 'Cabelos cacheados', category: 'especialidades', catLabel: 'Especialidades & Tratamentos', price: 45, priceLabel: 'R$ 45', desc: 'Corte e finalização respeitando a curvatura natural dos cachos.' },
+      { id: 'alisamentos', name: 'Alisamentos de cabelo', category: 'especialidades', catLabel: 'Especialidades & Tratamentos', price: 60, priceLabel: 'R$ 60', desc: 'Redução de volume e alinhamento capilar duradouro.' },
+      { id: 'coloracao', name: 'Coloração de cabelo', category: 'especialidades', catLabel: 'Especialidades & Tratamentos', price: 55, priceLabel: 'R$ 55', desc: 'Tonalização, camuflagem de fios brancos ou mudança de visual.' },
+      { id: 'shampoo-condicionador', name: 'Shampoo e condicionador', category: 'especialidades', catLabel: 'Especialidades & Tratamentos', price: 20, priceLabel: 'R$ 20', desc: 'Lavagem revitalizante no lavatório com produtos profissionais.' },
+
+      // 4. Estética & Pacotes Especiais
+      { id: 'depilacao-cera', name: 'Depilação com cera', category: 'estetica', catLabel: 'Estética & Pacotes Especiais', price: 25, priceLabel: 'R$ 25', desc: 'Remoção rápida e higiênica de pelos faciais (nariz/orelha).' },
+      { id: 'depilacao-sobrancelha', name: 'Depilação de sobrancelha', category: 'estetica', catLabel: 'Estética & Pacotes Especiais', price: 20, priceLabel: 'R$ 20', desc: 'Limpeza e alinhamento natural do olhar masculino.' },
+      { id: 'pacotes-noivos', name: 'Pacotes para noivos', category: 'estetica', catLabel: 'Estética & Pacotes Especiais', price: 0, priceLabel: 'Sob Consulta', desc: 'Dia do noivo completo: corte, barboterapia, sobrancelha e preparação especial.' }
+    ];
+
+    // Horários disponíveis a partir das 09:30
+    const TIME_SLOTS = [
+      '09:30', '10:00', '10:30', '11:00', '11:30',
+      '13:30', '14:00', '14:30', '15:00', '15:30',
+      '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'
+    ];
+
+    // Estado global da aplicação
+    const state = {
+      currentRoute: 'inicio',
+      selectedServiceIds: new Set(['corte-degrade']),
+      activeCategory: 'todos',
+      searchQuery: '',
+      bookingFilter: 'todos',
+      selectedDate: '',
+      selectedTime: '09:30',
+      clientName: '',
+      clientNotes: ''
+    };
+
+    // =========================================================================
+    // 1. ROTEAMENTO MULTIPÁGINA (HASH SPA SEM RELOAD)
+    // =========================================================================
+    const VALID_ROUTES = ['inicio', 'servicos', 'studio', 'agendamento', 'contato'];
+
+    function navigateTo(route, updateHash = true) {
+      const targetRoute = VALID_ROUTES.includes(route) ? route : 'inicio';
+      state.currentRoute = targetRoute;
+
+      // Alterna visibilidade das páginas/views
+      document.querySelectorAll('.page-view').forEach(section => {
+        section.classList.remove('active');
+      });
+      const activeSection = document.getElementById(`page-${targetRoute}`);
+      if (activeSection) {
+        activeSection.classList.add('active');
+      }
+
+      // Atualiza estado ativo no menu desktop e mobile
+      document.querySelectorAll('header nav .nav-link').forEach(link => {
+        const isCurrent = link.dataset.route === targetRoute;
+        if (isCurrent) {
+          link.classList.add('text-white', 'bg-studio-card', 'shadow-sm');
+          link.classList.remove('text-studio-muted');
+        } else {
+          link.classList.remove('text-white', 'bg-studio-card', 'shadow-sm');
+          link.classList.add('text-studio-muted');
+        }
+      });
+
+      document.querySelectorAll('.mobile-nav-item').forEach(link => {
+        const isCurrent = link.dataset.route === targetRoute;
+        if (isCurrent) {
+          link.classList.add('text-white', 'bg-studio-card');
+          link.classList.remove('text-studio-muted');
+        } else {
+          link.classList.remove('text-white', 'bg-studio-card');
+          link.classList.add('text-studio-muted');
+        }
+      });
+
+      // Fecha menu mobile se estiver aberto
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileIcon = document.getElementById('mobile-menu-icon');
+      if (!mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        mobileIcon.classList.replace('ph-x', 'ph-list');
+      }
+
+      if (updateHash && window.location.hash !== `#${targetRoute}`) {
+        history.pushState(null, '', `#${targetRoute}`);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Intercepta cliques em todos os links de rota
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('.nav-link');
+      if (link && link.dataset.route) {
+        e.preventDefault();
+        navigateTo(link.dataset.route, true);
+      }
+    });
+
+    // Suporte aos botões Voltar/Avançar do navegador
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      navigateTo(hash || 'inicio', false);
+    });
+
+    // Toggle Menu Mobile
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('mobile-menu-icon');
+      menu.classList.toggle('hidden');
+      if (menu.classList.contains('hidden')) {
+        icon.classList.replace('ph-x', 'ph-list');
+      } else {
+        icon.classList.replace('ph-list', 'ph-x');
+      }
+    });
+
+    // =========================================================================
+    // 2. PÁGINA SERVIÇOS & PREÇOS (FILTROS, BUSCA E SELEÇÃO)
+    // =========================================================================
+    function renderServicesPage() {
+      const grid = document.getElementById('services-grid');
+      const query = state.searchQuery.toLowerCase().trim();
+
+      const filtered = SERVICES_DATA.filter(srv => {
+        const matchCat = state.activeCategory === 'todos' || srv.category === state.activeCategory;
+        const matchQuery = srv.name.toLowerCase().includes(query) || srv.desc.toLowerCase().includes(query);
+        return matchCat && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-studio-surface border border-studio-border rounded-2xl p-10 text-center">
+            <i class="ph ph-magnifying-glass text-3xl text-studio-muted mb-2"></i>
+            <p class="text-white font-semibold">Nenhum serviço encontrado para "${state.searchQuery}"</p>
+            <p class="text-xs text-studio-muted mt-1">Tente buscar por corte, degradê, barba ou afro.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(srv => {
+        const isSelected = state.selectedServiceIds.has(srv.id);
+        return `
+          <div class="bg-studio-surface border ${isSelected ? 'border-studio-amber bg-studio-card/80' : 'border-studio-border'} rounded-2xl p-5 flex flex-col justify-between transition-all hover:border-studio-amber/60">
+            <div>
+              <div class="flex items-start justify-between gap-3 mb-2">
+                <span class="text-[11px] font-semibold uppercase tracking-wider text-studio-amber">${srv.catLabel}</span>
+                <span class="px-2.5 py-1 rounded-lg bg-studio-bg border border-studio-border text-xs font-bold text-white shrink-0">
+                  ${srv.priceLabel}
+                </span>
+              </div>
+              <h3 class="font-heading font-bold text-base text-white">${srv.name}</h3>
+              <p class="text-xs text-studio-muted mt-1.5 leading-relaxed">${srv.desc}</p>
+            </div>
+
+            <div class="pt-4 mt-4 border-t border-studio-border/60 flex items-center justify-between gap-2">
+              <button type="button" onclick="toggleServiceSelection('${srv.id}')" class="w-full py-2.5 px-4 rounded-xl text-xs font-heading font-bold flex items-center justify-center gap-1.5 transition-all ${
+                isSelected
+                  ? 'bg-studio-amber text-white'
+                  : 'bg-studio-bg hover:bg-studio-card text-studio-text border border-studio-border'
+              }">
+                <i class="ph-bold ${isSelected ? 'ph-check' : 'ph-plus'}"></i>
+                ${isSelected ? 'Selecionado para Agendar' : 'Selecionar Serviço'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      updateSelectionBar();
+    }
+
+    function updateSelectionBar() {
+      const bar = document.getElementById('services-selection-bar');
+      const countBadge = document.getElementById('selected-count-badge');
+      const count = state.selectedServiceIds.size;
+
+      countBadge.textContent = count;
+      if (count > 0) {
+        bar.classList.remove('hidden');
+      } else {
+        bar.classList.add('hidden');
+      }
+    }
+
+    // Eventos de Categoria na página Serviços
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => {
+          b.classList.remove('bg-studio-amber', 'text-white');
+          b.classList.add('bg-studio-bg', 'text-studio-muted', 'border', 'border-studio-border');
+        });
+        btn.classList.add('bg-studio-amber', 'text-white');
+        btn.classList.remove('bg-studio-bg', 'text-studio-muted', 'border', 'border-studio-border');
+
+        state.activeCategory = btn.dataset.cat;
+        renderServicesPage();
+      });
+    });
+
+    // Evento de Busca na página Serviços
+    document.getElementById('service-search').addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      renderServicesPage();
+    });
+
+    // =========================================================================
+    // 3. PÁGINA AGENDAMENTO ONLINE & INTEGRAÇÃO WHATSAPP
+    // =========================================================================
+    window.toggleServiceSelection = function(serviceId) {
+      if (state.selectedServiceIds.has(serviceId)) {
+        state.selectedServiceIds.delete(serviceId);
+      } else {
+        state.selectedServiceIds.add(serviceId);
+      }
+      renderServicesPage();
+      renderBookingServices();
+      updateBookingSummary();
+    };
+
+    function renderBookingServices() {
+      const container = document.getElementById('booking-services-list');
+      const filtered = SERVICES_DATA.filter(s => state.bookingFilter === 'todos' || s.category === state.bookingFilter);
+
+      container.innerHTML = filtered.map(srv => {
+        const checked = state.selectedServiceIds.has(srv.id);
+        return `
+          <button type="button" onclick="toggleServiceSelection('${srv.id}')" class="text-left p-3 rounded-xl border transition-all flex items-center justify-between gap-2 ${
+            checked
+              ? 'bg-studio-amber/15 border-studio-amber text-white'
+              : 'bg-studio-bg border-studio-border text-studio-muted hover:text-white hover:border-studio-border/80'
+          }">
+            <div class="min-w-0">
+              <p class="text-xs font-semibold truncate ${checked ? 'text-white' : 'text-studio-text'}">${srv.name}</p>
+              <p class="text-[11px] text-studio-amber font-medium">${srv.priceLabel}</p>
+            </div>
+            <div class="w-5 h-5 rounded-md flex items-center justify-center shrink-0 ${
+              checked ? 'bg-studio-amber text-white' : 'border border-studio-border'
+            }">
+              ${checked ? '<i class="ph-bold ph-check text-xs"></i>' : ''}
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderTimeSlots() {
+      const container = document.getElementById('time-slots-grid');
+      container.innerHTML = TIME_SLOTS.map(slot => {
+        const active = state.selectedTime === slot;
+        return `
+          <button type="button" onclick="selectTimeSlot('${slot}')" class="py-2 px-2 rounded-lg text-xs font-semibold border transition-all ${
+            active
+              ? 'bg-studio-amber border-studio-amber text-white shadow-sm'
+              : 'bg-studio-bg border-studio-border text-studio-text hover:border-studio-amber/60'
+          }">
+            ${slot}
+          </button>
+        `;
+      }).join('');
+    }
+
+    window.selectTimeSlot = function(slot) {
+      state.selectedTime = slot;
+      renderTimeSlots();
+      updateBookingSummary();
+    };
+
+    function formatDateBR(isoDate) {
+      if (!isoDate) return 'Selecione uma data';
+      const [year, month, day] = isoDate.split('-');
+      return `${day}/${month}/${year}`;
+    }
+
+    function updateBookingSummary() {
+      const summaryServices = document.getElementById('summary-services');
+      const summaryName = document.getElementById('summary-name');
+      const summaryDate = document.getElementById('summary-date');
+      const summaryTime = document.getElementById('summary-time');
+      const summaryTotal = document.getElementById('summary-total');
+
+      const selectedList = SERVICES_DATA.filter(s => state.selectedServiceIds.has(s.id));
+
+      if (selectedList.length === 0) {
+        summaryServices.innerHTML = '<p class="text-studio-muted italic text-xs">Nenhum serviço selecionado ainda.</p>';
+        summaryTotal.textContent = 'R$ 0,00';
+      } else {
+        summaryServices.innerHTML = selectedList.map(s => `
+          <div class="flex items-center justify-between bg-studio-bg/70 px-3 py-2 rounded-lg border border-studio-border/60">
+            <span class="text-xs text-white font-medium">${s.name}</span>
+            <span class="text-xs text-studio-amber font-semibold">${s.priceLabel}</span>
+          </div>
+        `).join('');
+
+        const totalNumeric = selectedList.reduce((acc, item) => acc + item.price, 0);
+        const hasConsult = selectedList.some(s => s.price === 0);
+        summaryTotal.textContent = hasConsult
+          ? `R$ ${totalNumeric},00 + Pacote Noivo`
+          : `R$ ${totalNumeric},00 (estimado)`;
+      }
+
+      summaryName.textContent = state.clientName.trim() || 'Não informado';
+      summaryDate.textContent = formatDateBR(state.selectedDate);
+      summaryTime.textContent = state.selectedTime || 'Selecione um horário';
+    }
+
+    // Listeners do formulário de agendamento
+    document.getElementById('booking-category-filter').addEventListener('change', (e) => {
+      state.bookingFilter = e.target.value;
+      renderBookingServices();
+    });
+
+    const dateInput = document.getElementById('booking-date');
+    // Define data mínima como hoje e valor padrão como amanhã
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+    dateInput.value = `${yyyy}-${mm}-${dd}`;
+    state.selectedDate = dateInput.value;
+
+    dateInput.addEventListener('change', (e) => {
+      state.selectedDate = e.target.value;
+      updateBookingSummary();
+    });
+
+    document.getElementById('client-name').addEventListener('input', (e) => {
+      state.clientName = e.target.value;
+      updateBookingSummary();
+    });
+
+    document.getElementById('client-notes').addEventListener('input', (e) => {
+      state.clientNotes = e.target.value;
+    });
+
+    // Confirmação e abertura do WhatsApp (51) 99689-2216
+    document.getElementById('confirm-whatsapp-btn').addEventListener('click', () => {
+      const feedback = document.getElementById('booking-feedback');
+      const selectedList = SERVICES_DATA.filter(s => state.selectedServiceIds.has(s.id));
+
+      if (selectedList.length === 0) {
+        feedback.className = 'rounded-xl p-3.5 text-xs font-medium border bg-red-950/60 border-red-500/40 text-red-200';
+        feedback.textContent = 'Por favor, selecione pelo menos um serviço antes de confirmar.';
+        feedback.classList.remove('hidden');
+        return;
+      }
+
+      if (!state.selectedDate) {
+        feedback.className = 'rounded-xl p-3.5 text-xs font-medium border bg-red-950/60 border-red-500/40 text-red-200';
+        feedback.textContent = 'Por favor, escolha a data desejada para o seu atendimento.';
+        feedback.classList.remove('hidden');
+        return;
+      }
+
+      if (!state.clientName.trim()) {
+        feedback.className = 'rounded-xl p-3.5 text-xs font-medium border bg-red-950/60 border-red-500/40 text-red-200';
+        feedback.textContent = 'Por favor, informe o seu nome para identificarmos sua reserva.';
+        feedback.classList.remove('hidden');
+        document.getElementById('client-name').focus();
+        return;
+      }
+
+      feedback.className = 'rounded-xl p-3.5 text-xs font-medium border bg-emerald-950/60 border-emerald-500/40 text-emerald-200';
+      feedback.textContent = 'Abrindo WhatsApp do Studio D83 com os detalhes do seu agendamento...';
+      feedback.classList.remove('hidden');
+
+      const servicesText = selectedList.map(s => `• ${s.name} (${s.priceLabel})`).join('\n');
+      const totalNumeric = selectedList.reduce((acc, item) => acc + item.price, 0);
+      const obsText = state.clientNotes.trim() ? `\n*Observação:* ${state.clientNotes.trim()}` : '';
+
+      const message =
+`Olá, *Barbearia - Studio D83*! Gostaria de solicitar um agendamento pelo site:
+
+*Cliente:* ${state.clientName.trim()}
+*Data:* ${formatDateBR(state.selectedDate)}
+*Horário:* ${state.selectedTime}
+
+*Serviços escolhidos:*
+${servicesText}
+
+*Estimativa:* R$ ${totalNumeric},00${obsText}
+
+Aguardo confirmação!`;
+
+      const whatsappUrl = `https://wa.me/5551996892216?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+
+    // Inicialização da Aplicação
+    window.addEventListener('DOMContentLoaded', () => {
+      renderServicesPage();
+      renderBookingServices();
+      renderTimeSlots();
+      updateBookingSummary();
+
+      const initialHash = window.location.hash.replace('#', '');
+      navigateTo(initialHash || 'inicio', false);
+    });
+  </script>
+</body>
+</html>
